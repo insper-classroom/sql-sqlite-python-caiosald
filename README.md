@@ -104,7 +104,7 @@ Objetivo: Familiarizar-se com os comandos básicos de SQL e aprender a filtrar r
 
 Crie uma tabela chamada "Estudantes" com os seguintes campos:
 
-- **ID (chave primária)**
+- **ID (chave primária)**  
 - **Nome**
 - **Curso**
 - **Ano de Ingresso**
