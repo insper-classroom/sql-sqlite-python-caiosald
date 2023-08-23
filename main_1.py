@@ -62,7 +62,7 @@ cursor.execute("SELECT * FROM Estudantes")
 conn.commit()
 print(cursor.fetchall())
 
-conn.close()
+conn.close()   
 
 
 
