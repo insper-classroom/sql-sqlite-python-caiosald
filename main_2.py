@@ -1,23 +1,42 @@
 import sqlite3
 from db.db_utils import *
 
-def main():
-    conn = sqlite3.connect('db/database_alunos.db')
 
-    cria_tabela(conn)
+conn = sqlite3.connect('db/database_alunos.db')
+cursor = conn.cursor()
 
-    students = [
-        ("Ana Silva", "Computação", 2019),
-        ("Pedro Silva", "Física", 2021),
-        ("Carla Souza", "Computação", 2020),
-        ("João Alves", "Matemática", 2018),
-        ("Maria Oliveira", "Química", 2022)
-    ]
-    
-    registro(conn, students)
+cursor.execute("""
+DROP TABLE IF EXISTS Estudantes
+""")
 
-    all_students = consulta(conn)
-    print("Todos os estudantes:")
-    print(all_students)
+cria_tabela(conn)
 
-    conn.close()
+Estudantes = [
+    ('Ana Silva', 'Computação', 2019),
+    ('Pedro Mendes', 'Física', 2021),
+    ('Carla Souza', 'Computação', 2020),
+    ('João Alves', 'Matemática', 2018),
+    ('Maria Oliveira', 'Química', 2022),
+]
+registro(conn, Estudantes)
+conn.commit()
+
+cursor.execute("SELECT * FROM Estudantes WHERE AnodeIngresso BETWEEN 2019 AND 2020")
+print(cursor.fetchall())
+
+atualiza(conn, "Estudantes", "AnodeIngresso", "Nome", 2023, "Maria Oliveira")
+cursor.execute("SELECT * FROM Estudantes")
+conn.commit()
+print(cursor.fetchall())
+
+deleta(conn, "Estudantes", "ID", 2)
+cursor.execute("SELECT * FROM Estudantes")
+conn.commit()
+print(cursor.fetchall())
+
+atualiza(conn, "Estudantes", "AnodeIngresso", "Curso", 3018, "Computação")
+cursor.execute("SELECT * FROM Estudantes")
+conn.commit()
+print(cursor.fetchall())
+
+conn.close()

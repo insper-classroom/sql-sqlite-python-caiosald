@@ -31,7 +31,7 @@ def atualiza(conn, table, oq_atualização, ident, ja_atualizado, ident_name):
 
 def deleta (conn, table, ident, deletar):
     cursor = conn.cursor()
-    cursor.execute(f"DELETE FROM {table} WHERE {ident} = ?", {deletar,})
+    cursor.execute(f"DELETE FROM {table} WHERE {ident} = ?", (deletar,))
     conn.commit()
 
 
